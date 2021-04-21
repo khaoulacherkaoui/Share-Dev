@@ -27,6 +27,7 @@ async(req,res) => {
     }
     const { name, email, password } = req.body;
     try{
+        // see if the user exists
         let user = await User.findOne({ email });
 
       if (user) {
@@ -35,6 +36,7 @@ async(req,res) => {
           .json({ errors: [{ msg: 'User already exists' }] });
       }
 
+      // Get users avatar
       const avatar = normalize(
         gravatar.url(email, {
           s: '200',
@@ -51,12 +53,14 @@ async(req,res) => {
         password
       });
 
+      // Encrypt password
       const salt = await bcrypt.genSalt(10);
 
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
 
+      // Return jsonwebtoken
       const payload = {
         user: {
           id: user.id
