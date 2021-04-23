@@ -1,0 +1,25 @@
+.sidebar{
+    flex: 4;
+    height: calc(100vh -50px);
+}
+.sidebarWrapper{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 3%;
+}
+.profilImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-left: 45px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.nameUser {
+    font-size: 12px;
+    margin-left: 10px;
+}
+.sidebarHr{
+    
+}
