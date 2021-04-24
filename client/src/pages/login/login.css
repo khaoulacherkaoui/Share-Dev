@@ -98,3 +98,23 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+  #flex {
+    display: flex;
+    flex-direction: column;
+  }
+  #a {
+    order: 2;
+  }
+  #b {
+    order: 1;
+  }
+
+  .loginImage {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    margin-left: 10%;
+  }
+}
