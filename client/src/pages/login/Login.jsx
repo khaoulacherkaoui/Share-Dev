@@ -1,10 +1,12 @@
 import "./login.css";
 import { useState } from "react";
-import diaologRegistrations from '../../components/dialogRegistration';
+import Popup from "../../components/Popup";
 
 export default function Login() {
-  const [openDialog, setOpenDialog] = useState(false);
-  
+  const [openPopup, setOpenPopup] = useState(false)
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
   return (
     <div className="login">
       <div id="flex" className="loginWrapper">
@@ -18,17 +20,21 @@ export default function Login() {
             <input placeholder="Password" className="loginInput" />
             <button className="loginButton">Sign in</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton" onClick={()=>setOpenDialog(true)}>Sign Up</button>
+            <button className="loginRegisterButton" onClick={
+              handleClickOpen
+            }>Sign Up</button>
           </form>
         </div>
         <div id="b" className="loginRight">
           <img className="loginImage" src="/assets/image_share.png"/>
         </div>
       </div>
-      <dialogRegistration>
-        openDialog ={openDialog}
-        setOpenDialog={setOpenDialog}
-      </dialogRegistration>
+      <Popup
+       title="Registration Form"
+       openPopup={openPopup}
+       setOpenPopup={setOpenPopup}>
+      </Popup>
     </div>
+    
   );
 }
