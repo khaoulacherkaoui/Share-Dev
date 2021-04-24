@@ -1,6 +1,9 @@
 import "./login.css";
+import { useState } from "react";
+import diaologRegistrations from '../../components/dialogRegistration';
 
 export default function Login() {
+  const [openDialog, setOpenDialog] = useState(false);
   
   return (
     <div className="login">
@@ -15,13 +18,17 @@ export default function Login() {
             <input placeholder="Password" className="loginInput" />
             <button className="loginButton">Sign in</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">Sign Up</button>
+            <button className="loginRegisterButton" onClick={()=>setOpenDialog(true)}>Sign Up</button>
           </form>
         </div>
         <div className="loginRight">
           <img className="loginImage" src="/assets/image_share.png"/>
         </div>
       </div>
+      <dialogRegistration>
+        openDialog ={openDialog}
+        setOpenDialog={setOpenDialog}
+      </dialogRegistration>
     </div>
   );
 }

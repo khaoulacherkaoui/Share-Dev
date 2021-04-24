@@ -1,0 +1,77 @@
+.register {
+    width: 420px;
+    height: 350px;
+    padding: '0 15px 40px 15px';
+    background-color: #f8fcfb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.registerBox {
+    width: 400px;
+    height: 330px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.registerInput {
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid rgb(151, 150, 150);
+    font-size: 14px;
+    padding-left: 20px;
+    margin-top: 5px;
+}
+.registerInput:focus {
+    outline: none;
+}
+.registerButton {
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #27debf;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 5px;
+}
+  
+.registerButton:focus {
+    outline: none;
+}
+  
+.registerButton:disabled {
+    cursor: not-allowed;
+}
+.or {
+    text-align: center;
+    color: #b6c0be;
+  }
+.googleButton {
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color:white;
+    color:rgb(85, 84, 84);
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 5px;
+    box-shadow: 0px 0px 4px rgb(179, 179, 179);
+}  
+
+.facebookButton {
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color:#4267B2;
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 5px;
+}
