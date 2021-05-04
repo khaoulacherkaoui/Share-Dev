@@ -1,6 +1,6 @@
 import "./login.css";
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
@@ -12,8 +12,9 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = (theme) => ({
   root: {
-    margin: 0,
+    margin: 1,
     padding: theme.spacing(2),
+    color: theme.palette.grey[700]
   },
   closeButton: {
     position: 'absolute',
@@ -21,6 +22,7 @@ const styles = (theme) => ({
     top: theme.spacing(1),
     color: theme.palette.grey[500],
   },
+
 });
 
 const DialogTitle = withStyles(styles)((props) => {
@@ -65,7 +67,7 @@ export default function Login({children}) {
             <input placeholder="Password" className="loginInput" />
             <button className="loginButton">Sign in</button>
             <span className="loginForgot">Forgot Password?</span>
-            <Button className="loginRegisterButton" onClick={handleClickOpen} >Sign Up</Button>
+            <Button variant="contained" className="loginRegisterButton" onClick={handleClickOpen}>Sign Up</Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
               <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                 Sign Up
