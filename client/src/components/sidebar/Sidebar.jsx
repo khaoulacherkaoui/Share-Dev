@@ -1,10 +1,16 @@
 import "./sidebar.css";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import { useTheme, useMediaQuery } from '@material-ui/core';
 
 export default function Sidebar() {
+     //responsive using BreakPoints
+    const theme=useTheme();
+    const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
     return (
         <div className="sidebar">
-            <div className="sidebarWrapper">
+            {isMatch? (<div></div>) : (
+                <>
+                <div className="sidebarWrapper">
                 <img src="/assets/person/1.jpg" alt="" className="profilImg"/>
                 <div className="nameUser">
                     Name name
@@ -35,6 +41,8 @@ export default function Sidebar() {
                         </li>
                     </ul>
             </div>
+            </>
+            )}
         </div>
     )
 }

@@ -1,0 +1,49 @@
+.menu1{
+    display: flex;
+}
+.profilImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+.nameUser {
+    font-size: 12px;
+    margin-left: 10px;
+    font-weight: 500;
+}
+.req{
+    font-size: 15px;
+    margin-left: 20px;
+    font-weight: 500;
+}
+.add{
+    font-size: 20px !important;
+    margin-left: 10px;
+}
+.searchbar {
+    width: 50%;
+    height: 30px;
+    background-color: #eafaf6;
+    box-shadow: 0px 0px 4px rgb(179, 179, 179);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 3%;
+}
+  
+.searchIcon {
+    font-size: 20px !important;
+    margin-left: 10px;
+}
+  
+.searchInput2 {
+    border: none;
+    width: 70%;
+    background-color: #eafaf6;
+}
+  
+.searchInput:focus {
+    outline: none;
+}
