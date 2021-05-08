@@ -1,5 +1,5 @@
 import "./login.css";
-import React from 'react';
+import React, { useState} from 'react';
 import { createMuiTheme, withStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,6 +9,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import RegistrationForm from "../../components/registrationForm/RegistrationForm";
 
 const styles = (theme) => ({
   root: {
@@ -45,7 +46,7 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function Login({children}) {
+export default function Login() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -54,6 +55,17 @@ export default function Login({children}) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [formData,setFormData]=useState({
+    email: '',
+    password: ''
+});
+const {email, password}=formData;
+const onChange= e => setFormData({ ...formData, [e.target.name]: e.target.value})
+const onSubmit= async e => {
+    e.preventDefault();
+    console.log('Success');
+};
   return (
     <div className="login">
       <div id="flex" className="loginWrapper">
@@ -62,9 +74,25 @@ export default function Login({children}) {
           <span className="loginDesc">
             With SHAREDEV, share and keep in touch with developers community.
           </span>
-          <form className="loginBox" >
-            <input placeholder="Email" className="loginInput" />
-            <input placeholder="Password" className="loginInput" />
+          <form className="loginBox" onSubmit={e => onSubmit(e)}>
+            <input 
+            type="email"
+            name="email"
+            placeholder="Email" 
+            className="loginInput"
+            value={email}
+            onChange={e => onChange(e)}
+            required />
+            <input 
+            type="password"
+            name="password"
+            placeholder="Password" 
+            className="loginInput"
+            value={password}
+            onChange={e => onChange(e)}
+            minLength='6'
+            required
+            />
             <button className="loginButton">Sign in</button>
             <span className="loginForgot">Forgot Password?</span>
             <Button variant="contained" className="loginRegisterButton" onClick={handleClickOpen}>Sign Up</Button>
@@ -73,7 +101,7 @@ export default function Login({children}) {
                 Sign Up
               </DialogTitle>
               <DialogContent dividers>
-                {children}
+                <RegistrationForm/>
               </DialogContent>
             </Dialog>
           </form>

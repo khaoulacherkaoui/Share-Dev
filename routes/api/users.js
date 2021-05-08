@@ -17,6 +17,9 @@ router.post('/',
     check('name','Name is required')
         .not()
         .isEmpty(),
+    check('profession','Profession is required')
+        .not()
+        .isEmpty(),
     check('email','Please include a valid email').isEmail(),
     check('password','Please enter a password with 6 or more characters').isLength({ min: 6 })
 ],
@@ -25,7 +28,7 @@ async(req,res) => {
     if (!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array()});
     }
-    const { name, email, password } = req.body;
+    const { name, profession, email, password } = req.body;
     try{
         // see if the user exists
         let user = await User.findOne({ email });
@@ -48,6 +51,7 @@ async(req,res) => {
 
       user = new User({
         name,
+        profession,
         email,
         avatar,
         password

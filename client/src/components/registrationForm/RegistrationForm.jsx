@@ -1,14 +1,74 @@
-import "./registrationForm.css"
+import "./registrationForm.css";
+import { useState} from 'react';
 
 export default function RegistrationForm() {
+    const [formData,setFormData]=useState({
+        name: '',
+        email: '',
+        password: '',
+        password2: '',
+        profession: ''
+    });
+    const {name, email, password, password2, profession}=formData;
+    const onChange= e => setFormData({ ...formData, [e.target.name]: e.target.value})
+    const onSubmit= async e => {
+        e.preventDefault();
+        if(password!==password2){
+            console.log('Passwords do not matches');
+        }else{
+            console.log('Success');
+        }
+    };
     return (
         <div className="register">
-            <form className="registerBox" >
-                <input placeholder="First Name" className="registerInput"/>
-                <input placeholder="Last Name" className="registerInput"/>
-                <input placeholder="Email" className="registerInput" />
-                <input placeholder="New Password" className="registerInput" />
-                <input placeholder="Profession" className="registerInput"/>
+            <form className="registerBox" onSubmit={e => onSubmit(e)}>
+                <input 
+                type="text"
+                placeholder="Full Name" 
+                className="registerInput"
+                name="name"
+                value={name}
+                onChange={e => onChange(e)}
+                required
+                />
+                <input 
+                type="text"
+                placeholder="Profession" 
+                className="registerInput"
+                name="profession"
+                value={profession}
+                onChange={e => onChange(e)}
+                required
+                />
+                <input 
+                type="email"
+                placeholder="Email" 
+                className="registerInput"
+                name="email"
+                value={email}
+                onChange={e => onChange(e)}
+                required
+                />
+                <input 
+                type="password"
+                placeholder="New Password" 
+                className="registerInput"
+                name="password"
+                value={password}
+                minLength='6'
+                onChange={e => onChange(e)}
+                required
+                />
+                <input 
+                type="password"
+                placeholder="Confirm Password" 
+                className="registerInput"
+                name="password2"
+                value={password2}
+                minLength='6'
+                onChange={e => onChange(e)}
+                required
+                />
                 <button className="registerButton">Sign Up</button>
                 <span className="or">or</span>
                 <button className="googleButton">
