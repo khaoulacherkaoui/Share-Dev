@@ -1,7 +1,4 @@
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import SimpleMenu from './components/menu/Menu';
-import Menu from './components/menu/Menu';
-import RegistrationForm from './components/registrationForm/RegistrationForm';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import Alert from './components/layout/Alert'
@@ -15,6 +12,7 @@ import './App.css';
 function App() {
 
   return (
+<<<<<<< HEAD
     <Provider store={store}>
       <Router>
         <Alert/>
@@ -23,6 +21,14 @@ function App() {
         </Switch>
       </Router>
     </Provider>
+=======
+    <Router>
+      <Switch>
+        <Route exact path='/login' component={Login}/>
+        <Route exact path='/' component={Home}/>
+      </Switch>
+    </Router>
+>>>>>>> a24d7b69ae0019f2922f1e0e3b0e66d34022c6fa
  
   );
 }

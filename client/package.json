@@ -45,6 +45,9 @@
       "last 1 safari version"
     ]
   },
+<<<<<<< HEAD
 
+=======
+>>>>>>> a24d7b69ae0019f2922f1e0e3b0e66d34022c6fa
   "proxy": "http://localhost:4000"
 }
