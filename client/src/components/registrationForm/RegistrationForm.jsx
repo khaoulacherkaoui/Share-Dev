@@ -2,10 +2,12 @@ import "./registrationForm.css";
 import { useState} from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
+import { Redirect } from "react-router-dom";
 
 
-const RegistrationForm = ({ setAlert}) => {
+const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
 
     const [formData,setFormData]=useState({
         name: '',
@@ -21,9 +23,13 @@ const RegistrationForm = ({ setAlert}) => {
         if(password!==password2){
             setAlert('Passwords do not matches', 'danger');
         }else{
-            console.log('Success');
+            register({name,profession,email,password});
         }
     };
+    //Redirect if logged in
+    if(isAuthenticated){
+       return <Redirect to="/" />
+    }
     return (
         <div className="register">
             <form className="registerBox" onSubmit={e => onSubmit(e)}>
@@ -34,7 +40,7 @@ const RegistrationForm = ({ setAlert}) => {
                 name="name"
                 value={name}
                 onChange={e => onChange(e)}
-                required
+                
                 />
                 <input 
                 type="text"
@@ -43,7 +49,7 @@ const RegistrationForm = ({ setAlert}) => {
                 name="profession"
                 value={profession}
                 onChange={e => onChange(e)}
-                required
+                
                 />
                 <input 
                 type="email"
@@ -52,7 +58,7 @@ const RegistrationForm = ({ setAlert}) => {
                 name="email"
                 value={email}
                 onChange={e => onChange(e)}
-                required
+                
                 />
                 <input 
                 type="password"
@@ -62,7 +68,7 @@ const RegistrationForm = ({ setAlert}) => {
                 value={password}
                 minLength='6'
                 onChange={e => onChange(e)}
-                required
+                
                 />
                 <input 
                 type="password"
@@ -72,7 +78,7 @@ const RegistrationForm = ({ setAlert}) => {
                 value={password2}
                 minLength='6'
                 onChange={e => onChange(e)}
-                required
+                
                 />
                 <button className="registerButton">Sign Up</button>
                 <span className="or">or</span>
@@ -89,7 +95,11 @@ const RegistrationForm = ({ setAlert}) => {
 
 RegistrationForm.propTypes = {
     setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
   };
 
-
-export default connect(null, { setAlert })(RegistrationForm);
+  const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+export default connect(mapStateToProps, { setAlert,register })(RegistrationForm);

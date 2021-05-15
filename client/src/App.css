@@ -34,7 +34,7 @@
 .bg-danger,
 .badge-danger,
 .alert-danger {
-  background: var(--danger-color);
+  background: rgb(252, 3, 3) ;
   color: #fff;
 }
 

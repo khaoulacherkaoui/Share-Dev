@@ -1,15 +1,18 @@
 import "./login.css";
 import React, { useState} from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 import { createMuiTheme, withStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import RegistrationForm from "../../components/registrationForm/RegistrationForm";
+import { Redirect } from "react-router-dom";
 
 const styles = (theme) => ({
   root: {
@@ -46,7 +49,7 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-export default function Login() {
+const Login =({login, isAuthenticated})=> {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -64,8 +67,13 @@ const {email, password}=formData;
 const onChange= e => setFormData({ ...formData, [e.target.name]: e.target.value})
 const onSubmit= async e => {
     e.preventDefault();
-    console.log('Success');
+    login(email,password);
 };
+
+//Redirect if logged in
+if(isAuthenticated){
+  return <Redirect to="/" />
+}
   return (
     <div className="login">
       <div id="flex" className="loginWrapper">
@@ -114,3 +122,13 @@ const onSubmit= async e => {
     
   );
 }
+
+Login.prototype={
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+}
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(mapStateToProps, { login })(Login);
