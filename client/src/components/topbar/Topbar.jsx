@@ -1,6 +1,7 @@
 import './topbar.css';
 import { Search, Person, Chat, Notifications, Settings } from "@material-ui/icons";
 import { useTheme, useMediaQuery } from '@material-ui/core'
+import { Link } from "react-router-dom";
 import SimpleMenu from '../menu/Menu';
 
 export default function Topbar() {
@@ -10,7 +11,9 @@ export default function Topbar() {
     return (
     <div className="topbarContainer">
       <div className="topbarLeft">
+      <Link to="/" className="link">
               <img className="logo" src="/assets/logo.png"/>
+              </Link>
               {isMatch ? <SimpleMenu/> : (
                 <div className="searchbar">
                   <Search className="searchIcon" />
@@ -25,11 +28,15 @@ export default function Topbar() {
         <div className="topbarRight">
           <div className="topbarIcons">
             <div className="topbarIconItem">
+            <Link to="/profile"  className="link">
               <Person />
+              </Link>
               <span className="topbarIconBadge">1</span>
             </div>
             <div className="topbarIconItem">
+            <Link to="/messenger" className="link">
               <Chat />
+              </Link>
               <span className="topbarIconBadge">2</span>
             </div>
             <div className="topbarIconItem">

@@ -89,3 +89,9 @@
   justify-content: center;
   font-size: 12px;
 }
+.link{
+  color: #1fb299;
+}
+.link:hover {
+  color: #1fb299
+}
