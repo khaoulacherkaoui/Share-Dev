@@ -5,6 +5,8 @@ import Login from './pages/login/Login';
 import Alert from './components/layout/Alert'
 import Profile from './pages/profile/Profile';
 import Messenger from "./pages/messenger/Messenger";
+import Post from './components/post/Post';
+
 
 // Redux
 import { Provider } from 'react-redux';
@@ -32,6 +34,8 @@ function App() {
           <Alert/>
           <Route exact path='/login' component={Login}/>
         </section>
+        <Route exact path='/post' component={Post}/>
+
        
       </Switch>
     </Router>
