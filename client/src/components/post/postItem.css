@@ -61,12 +61,14 @@
   display: flex;
   align-items: center;
 }
-
-.likeIcon {
-  width: 24px;
-  height: 24px;
-  margin-right: 5px;
-  cursor: pointer;
+.likes {
+  width: 50px;
+    background-color:  white;
+    font-size: 10px;
+    border:none; 
+    border-radius:5px ;
+    font-weight: normal;
+    cursor: pointer
 }
 
 .postLikeCounter {
