@@ -42,7 +42,7 @@
 .bg-success,
 .badge-success,
 .alert-success {
-  background: var(--success-color);
+  background:  rgba(3, 252, 115, 0.603) ;
   color: #fff;
 }
 
