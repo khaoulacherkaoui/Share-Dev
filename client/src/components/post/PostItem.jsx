@@ -9,6 +9,8 @@ import {Link } from 'react-router-dom';
 import {connect } from 'react-redux';
 import Moment from 'react-moment';
 import { addLike, removeLike, deletePost} from '../../actions/post'
+import CommentForm from './CommentForm';
+import post from '../../reducers/post';
 
 const PostItem = ({
     addLike,
@@ -51,6 +53,7 @@ const PostItem = ({
               <button onClick={e=> removeLike(_id)} type="button" className="likes">
                  <ThumbDownAltIcon/>
               </button>
+              <CommentForm postId={_id} />
           </div>
           <div className="postBottomRight">
               <Link to={`/post/${_id}`}>
