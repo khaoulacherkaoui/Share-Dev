@@ -95,3 +95,12 @@
 .link:hover {
   color: #1fb299
 }
+.logout {
+  width: 50px;
+    background-color:  white;
+    font-size: 10px;
+    border:none; 
+    border-radius:5px ;
+    font-weight: normal;
+    cursor: pointer
+}

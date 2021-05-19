@@ -1,10 +1,14 @@
 import './topbar.css';
-import { Search, Person, Chat, Notifications, Settings } from "@material-ui/icons";
+import { Search, Person, Chat, Notifications } from "@material-ui/icons";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useTheme, useMediaQuery } from '@material-ui/core'
 import { Link } from "react-router-dom";
 import SimpleMenu from '../menu/Menu';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {logout} from '../../actions/auth';
 
-export default function Topbar() {
+const Topbar=({ auth: {isAuthenticated, loading}, logout})=> {
   //responsive using BreakPoints
   const theme=useTheme();
   const isMatch=useMediaQuery(theme.breakpoints.down('sm'));
@@ -44,7 +48,13 @@ export default function Topbar() {
               <span className="topbarIconBadge">1</span>
             </div>
             <div className="topbarIconItem">
-              <Settings />
+              <Link to='/login'>
+              { !loading && (
+                <button onClick={logout} type="button" className="logout">
+                <ExitToAppIcon />
+              </button>
+              )}
+              </Link>
             </div>
           </div>
         </div>
@@ -52,3 +62,13 @@ export default function Topbar() {
     </div>
     )
 }
+
+Topbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+}
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {logout})(Topbar)

@@ -10,7 +10,7 @@ import {connect } from 'react-redux';
 import Moment from 'react-moment';
 import { addLike, removeLike, deletePost} from '../../actions/post'
 import CommentForm from './CommentForm';
-import post from '../../reducers/post';
+import CommentItem from './CommentItem';
 
 const PostItem = ({
     addLike,
@@ -24,8 +24,8 @@ const PostItem = ({
           <div className="postTopLeft">
             <Link to={`/profile/${user}`}>
             <img className="postProfileImg" src={avatar} alt="" />
-            </Link>
             <span className="postUsername">{name}</span>
+            </Link>
             <span className="postDate">Posted on {' '}<Moment format='YYYY/MM/DD'>{date}</Moment></span>
           </div>
           <div className="postTopRight">
@@ -56,13 +56,17 @@ const PostItem = ({
               <CommentForm postId={_id} />
           </div>
           <div className="postBottomRight">
-              <Link to={`/post/${_id}`}>
+              <Link to={'/login'}>
                   <span className="postCommentText">{comments.length} comments</span>
               </Link>
           </div>
         </div>
       </div>
-      
+      <div className="comments">
+          {comments.map(comment => (
+            <CommentItem key={comment._id} comment={comment} postId={_id} />
+          ))}
+      </div>
     </div>
     )
 
