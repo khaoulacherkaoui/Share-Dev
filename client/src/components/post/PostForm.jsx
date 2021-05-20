@@ -4,18 +4,34 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {addPost} from '../../actions/post';
 import {PermMedia, Label, Room, EmojiEmotions, Cancel,} from "@material-ui/icons";
+import axios from "axios";
 
 const PostForm = ({addPost}) => {
     const [text,setText]= useState('');
+    const [fileName, setFileName]= useState('');
+
+    const onChangeFile = e => {
+      setFileName(e.target.files[0]);
+    }
+
+    const changeOnClick = (e) => {
+      e.preventDefault();
+
+      const formData= new FormData();
+
+      formData.append("text", text);
+      formData.append("postimage", fileName);
+
+      setText('');
+      setFileName('');
+
+      axios.post('/api/posts', formData);
+    }
+
     return (
-    <form className="share" onSubmit={e=>{
-        e.preventDefault();
-        addPost({text});
-        setText('');
-    }}>
+    <form className="share" onSubmit={changeOnClick} encType="multipart/form-data">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img className="shareProfileImg" src="/assets/person/1.jpg" alt=""/>
           <input
             value={text}
             placeholder="What's in your mind ?" 
@@ -26,20 +42,19 @@ const PostForm = ({addPost}) => {
         <hr className="shareHr" />
         <div className="shareBottom" >
           <div className="shareOptions">
+            <div className="shareOption">
               <PermMedia htmlColor="tomato" className="shareIcon" />
-              <span className="shareOptionText">Photo or Video</span>
-            <div className="shareOption">
-              <Label htmlColor="blue" className="shareIcon" />
-              <span className="shareOptionText">Tag</span>
+              <input 
+              type="file" 
+              filename="image" 
+              placeholder="Photo" 
+              className="shareInput" 
+              onChange={e => {
+                setFileName(e.target.files[0]);
+              }}
+            />
             </div>
-            <div className="shareOption">
-              <Room htmlColor="green" className="shareIcon" />
-              <span className="shareOptionText">Location</span>
-            </div>
-            <div className="shareOption">
-              <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
-              <span className="shareOptionText">Feelings</span>
-            </div>
+            
           </div>
           <input type="submit" value="Share" className="shareButton"/>
         </div>
