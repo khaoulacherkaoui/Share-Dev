@@ -39,7 +39,6 @@ const PostItem = ({
         </div>
         <div className="postCenter">
           <span className="postText">{text}</span>
-          <img className="postImg" src="/assets/image_share.png" alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

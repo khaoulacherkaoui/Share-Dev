@@ -84,6 +84,7 @@ export const deletePost = id => async dispatch => {
 export const addPost = formData => async dispatch => {
   const config={
     headers:{
+      'x-auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjBhOThkNjA5MTBlYzg0ODBjOWI1YThjIn0sImlhdCI6MTYyMTcyNDUxMiwiZXhwIjoxNjIyMTU2NTEyfQ.u1WLbp5JC4DGowg8eSKqewDFlXJ8Oo3Pzl1jm5AU7WA',
       'Content-Type':'application/json'
     }
   }

@@ -8,6 +8,7 @@ import {PermMedia, Label, Room, EmojiEmotions, Cancel,} from "@material-ui/icons
 const PostForm = ({addPost}) => {
   
     const [text,setText]= useState('');
+    
     return (
     <form className="share" onSubmit={e=>{
         e.preventDefault();
