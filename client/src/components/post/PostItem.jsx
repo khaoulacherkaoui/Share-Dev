@@ -17,7 +17,7 @@ const PostItem = ({
     removeLike,
     deletePost,
     auth,
-    post: {_id, text, name, avatar, user, likes, comments, date}}) => (
+    post: {_id, text, name,postimage, avatar, user, likes, comments, date}}) => (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
@@ -39,7 +39,7 @@ const PostItem = ({
         </div>
         <div className="postCenter">
           <span className="postText">{text}</span>
-          <img className="postImg" src="/assets/image_share.png" alt="" />
+          <img className="postImg" src={`/uploads/${postimage}`} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
