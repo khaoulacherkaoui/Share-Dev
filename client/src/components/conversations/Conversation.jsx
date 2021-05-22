@@ -4,14 +4,13 @@ import "./conversation.css";
 
 export default function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);
 
     const getUser = async () => {
       try {
-        const res = await axios("/users?userId=" + friendId);
+        const res = await axios.get("/api/users?id=" + friendId);
         setUser(res.data);
       } catch (err) {
         console.log(err);
@@ -25,13 +24,13 @@ export default function Conversation({ conversation, currentUser }) {
       <img
         className="conversationImg"
         src={
-          user?.profilePicture
-            ? PF + user.profilePicture
-            : PF + "person/noAvatar.png"
+          currentUser?.avatar
+            ? currentUser.avatar
+            :"person/noAvatar.png"
         }
         alt=""
       />
-      <span className="conversationName">{user?.username}</span>
+      <span className="conversationName">{user?.name}</span>
     </div>
   );
 }

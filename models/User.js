@@ -19,6 +19,18 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  friendsId: {
+    type: Array,
+    default: [],
+  },
+  followers: {
+    type: Array,
+    default: [],
+  },
+  followings: {
+    type: Array,
+    default: [],
+  },
   password: {
     type: String,
     required: true,

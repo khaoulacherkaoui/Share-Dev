@@ -4,12 +4,14 @@ import Conversation from "../../components/conversations/Conversation";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+
 import axios from "axios";
 import { io } from "socket.io-client";
 import React from 'react'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
+import { useSelector } from 'react-redux'
+
 
 //comm
 export default function Messenger() {
@@ -20,10 +22,9 @@ export default function Messenger() {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const socket = useRef();
-  const { user } = useContext(AuthContext);
+  let user = useSelector(state => state.auth.user);
   const scrollRef = useRef();
-
-
+  
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
     socket.current.on("getMessage", (data) => {
@@ -53,7 +54,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user._id);
+        const res = await axios.get("/api/conversations/" + user._id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -65,7 +66,7 @@ export default function Messenger() {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?._id);
+        const res = await axios.get("/api/messages/" + currentChat?._id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -93,7 +94,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
@@ -113,21 +114,17 @@ export default function Messenger() {
           <div className="chatMenuWrapper">
             <div className="me">
               <img className="profImg" src={
-                user.profilePicture
-                  ? user.profilePicture
-                  : "/assets/person/noAvatar.png"
+                "/assets/person/noAvatar.png"
               } alt="" />
               
              
                
-              <Dropdown text={user.username} pointing='left' className='myName'>
+              <Dropdown text={user.name} pointing='left' className='myName'>
                 <Dropdown.Menu>
                   <Dropdown.Item>Email : {user.email}</Dropdown.Item>
-                  <Dropdown.Item>city : {user.city ? user.city
-                    : "not defined"}</Dropdown.Item>
-
+                 
                   <Dropdown.Divider />
-                  <Dropdown.Item>proffession : {user.profession ? user.city
+                  <Dropdown.Item>proffession : {user.profession ? user.profession
                     : "not defined"}</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -189,3 +186,4 @@ export default function Messenger() {
     </>
   );
 }
+

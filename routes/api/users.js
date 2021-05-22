@@ -86,5 +86,19 @@ async(req,res) => {
     }
 }   
 );
+//get a user
+router.get("/", async (req, res)=>{
+  const id = req.query.id;
+  const name = req.query.name;
+  try {
+    const user = id
+      ? await User.findById(id)
+      : await User.findOne({ name: name });
+    const { password, proffession, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
