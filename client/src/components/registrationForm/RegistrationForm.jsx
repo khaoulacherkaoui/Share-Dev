@@ -1,37 +1,40 @@
 import "./registrationForm.css";
-import { useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
-import { Redirect } from "react-router-dom";
 
+const Register = ({ setAlert, register, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
+    profession: ''
+  });
 
-const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
+  const { name, email, password, password2, profession } = formData;
 
-    const [formData,setFormData]=useState({
-        name: '',
-        email: '',
-        password: '',
-        password2: '',
-        profession: ''
-    });
-    const {name, email, password, password2, profession}=formData;
-    const onChange= e => setFormData({ ...formData, [e.target.name]: e.target.value})
-    const onSubmit= async e => {
-        e.preventDefault();
-        if(password!==password2){
-            setAlert('Passwords do not matches', 'danger');
-        }else{
-            register({name,profession,email,password});
-        }
-    };
-    //Redirect if logged in
-    if(isAuthenticated){
-       return <Redirect to="/" />
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert('Passwords do not match', 'danger');
+    } else {
+      register({ name, email, password, profession});
     }
-    return (
-        <div className="register">
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
+
+  return (
+    <div className="register" >
             <form className="registerBox" onSubmit={e => onSubmit(e)}>
                 <input 
                 type="text"
@@ -39,8 +42,8 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 className="registerInput"
                 name="name"
                 value={name}
-                onChange={e => onChange(e)}
-                
+                onChange={onChange}
+                required
                 />
                 <input 
                 type="text"
@@ -48,8 +51,8 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 className="registerInput"
                 name="profession"
                 value={profession}
-                onChange={e => onChange(e)}
-                
+                onChange={onChange}
+                required
                 />
                 <input 
                 type="email"
@@ -57,8 +60,8 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 className="registerInput"
                 name="email"
                 value={email}
-                onChange={e => onChange(e)}
-                
+                onChange={onChange}
+                required
                 />
                 <input 
                 type="password"
@@ -67,8 +70,8 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 name="password"
                 value={password}
                 minLength='6'
-                onChange={e => onChange(e)}
-                
+                onChange={onChange}
+                required
                 />
                 <input 
                 type="password"
@@ -77,10 +80,10 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 name="password2"
                 value={password2}
                 minLength='6'
-                onChange={e => onChange(e)}
-                
+                onChange={onChange}
+                required
                 />
-                <button className="registerButton">Sign Up</button>
+                <button className="registerButton" type="submit" value="Register">Sign Up</button>
                 <span className="or">or</span>
                 <button className="googleButton">
                     Sign Up With Google
@@ -90,16 +93,17 @@ const RegistrationForm = ({ setAlert,register,isAuthenticated}) => {
                 </button>
             </form>
         </div>
-    )
-}
+  );
+};
 
-RegistrationForm.propTypes = {
-    setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
-  };
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
 
-  const mapStateToProps = (state) => ({
-    isAuthenticated: state.auth.isAuthenticated
-  });
-export default connect(mapStateToProps, { setAlert,register })(RegistrationForm);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

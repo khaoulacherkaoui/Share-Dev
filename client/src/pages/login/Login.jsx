@@ -1,18 +1,21 @@
 import "./login.css";
 import React, { useState} from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { login } from '../../actions/auth';
 import { createMuiTheme, withStyles, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import RegistrationForm from "../../components/registrationForm/RegistrationForm";
-import { Redirect } from "react-router-dom";
+import Register from '../../components/registrationForm/RegistrationForm';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
+
 
 const styles = (theme) => ({
   root: {
@@ -49,7 +52,7 @@ const DialogContent = withStyles((theme) => ({
   },
 }))(MuiDialogContent);
 
-const Login =({login, isAuthenticated})=> {
+const Login = ({ login, isAuthenticated }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -65,15 +68,15 @@ const Login =({login, isAuthenticated})=> {
 });
 const {email, password}=formData;
 const onChange= e => setFormData({ ...formData, [e.target.name]: e.target.value})
-const onSubmit= async e => {
+const onSubmit= e => {
     e.preventDefault();
-    login(email,password);
+    login(email, password);
+    console.log('Success');
 };
-
-//Redirect if logged in
-if(isAuthenticated){
-  return <Redirect to="/" />
+if (isAuthenticated) {
+  return <Redirect to="/dashboard" />;
 }
+
   return (
     <div className="login">
       <div id="flex" className="loginWrapper">
@@ -89,7 +92,7 @@ if(isAuthenticated){
             placeholder="Email" 
             className="loginInput"
             value={email}
-            onChange={e => onChange(e)}
+            onChange={onChange}
             required />
             <input 
             type="password"
@@ -97,19 +100,19 @@ if(isAuthenticated){
             placeholder="Password" 
             className="loginInput"
             value={password}
-            onChange={e => onChange(e)}
+            onChange={onChange}
             minLength='6'
             required
             />
-            <button className="loginButton">Sign in</button>
+            <button className="loginButton" type="submit" value="Login">Sign in</button>
             <span className="loginForgot">Forgot Password?</span>
             <Button variant="contained" className="loginRegisterButton" onClick={handleClickOpen}>Sign Up</Button>
             <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
               <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                Sign Up
+              <Link to="/register">Sign Up</Link>
               </DialogTitle>
               <DialogContent dividers>
-                <RegistrationForm/>
+                <Register/>
               </DialogContent>
             </Dialog>
           </form>
@@ -122,13 +125,13 @@ if(isAuthenticated){
     
   );
 }
-
-Login.prototype={
+Login.propTypes = {
   login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
-}
+  isAuthenticated: PropTypes.bool
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
+
 export default connect(mapStateToProps, { login })(Login);

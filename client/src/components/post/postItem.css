@@ -6,6 +6,7 @@
   margin: 30px 0;
   margin-top: 20px;
   margin-left: 10%;
+  background-color: white;
 }
 
 .postWrapper {
@@ -63,12 +64,12 @@
 }
 .likes {
   width: 50px;
-    background-color:  white;
-    font-size: 10px;
-    border:none; 
-    border-radius:5px ;
-    font-weight: normal;
-    cursor: pointer
+  background-color: white;
+  font-size: 10px;
+  border: none;
+  border-radius: 5px;
+  font-weight: normal;
+  cursor: pointer;
 }
 
 .postLikeCounter {
