@@ -12,12 +12,6 @@ const PostSchema = new Schema({
   name: {
     type: String
   },
-  image: {
-    type: String,
-  },
-  postimage: {
-    type: String,
-  },
   avatar: {
     type: String
   },
