@@ -1,4 +1,5 @@
 {
     "mongoURI":"mongodb+srv://share-dev:sharedev2021@sharedev.6lehq.mongodb.net/Database1?retryWrites=true&w=majority",
-    "jwtSecret":"MySecretToken"
+    "jwtSecret":"MySecretToken",
+    "githubToken": "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"
 }
