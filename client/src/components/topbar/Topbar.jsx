@@ -32,7 +32,7 @@ const Topbar=({ auth: {isAuthenticated, loading}, logout})=> {
         <div className="topbarRight">
           <div className="topbarIcons">
             <div className="topbarIconItem">
-            <Link to="/profile"  className="link">
+            <Link to="/profiles"  className="link">
               <Person />
               </Link>
               <span className="topbarIconBadge">1</span>

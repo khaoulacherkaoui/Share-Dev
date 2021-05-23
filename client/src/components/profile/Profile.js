@@ -2,16 +2,17 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Spinner from '../../components/layout/Spinner';
-import ProfileTop from '../../components/profile/ProfileTop';
-import ProfileAbout from '../../components/profile/ProfileAbout';
-import ProfileExperience from '../../components/profile/ProfileExperience';
-import ProfileEducation from '../../components/profile/ProfileEducation';
-import ProfileGithub from '../../components/profile/ProfileGithub';
+import Spinner from '../layout/Spinner';
+import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
+import ProfileExperience from './ProfileExperience';
+import ProfileEducation from './ProfileEducation';
+import ProfileGithub from './ProfileGithub';
 import { getProfileById } from '../../actions/profile';
 import { Chat } from "@material-ui/icons";
 //import Navbar from '../layout/Navbar';
-import Topbar from '../../components/topbarprofile/Topbar';
+import Topbar from '../topbarprofile/Topbar';
+import Feed from '../feed/Feed'
 
 const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
             <br/>
             <nav>
               <ul className="nav nav-tabs">
-                <li className="nav-item"><a className="nav-link active" href="#posts">Posts</a></li>
+                <li className="nav-item"><a className="nav-link active" href="#feed">Posts</a></li>
                 <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
                 <li className="nav-item"><a className="nav-link" href="#friends">Friends</a></li>
                 <li className="nav-item"><Link to="/profiles" className="nav-link">Developers</Link></li>
@@ -52,15 +53,17 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
                 )}
               </ul>
             </nav>
-            <div className="back">
-            <div className="profile-grid my-1 "> 
-            <ProfileAbout profile={profile} />
-            <div className="profile-exp bg-white p-2">
 
-              <h2 className="text-primary">Experience</h2>
-              {profile.experience.length > 0 ? (
-                <Fragment>
-                  {profile.experience.map((experience) => (
+            <div className="back">
+              <div className="profile-grid my-1 ">
+                <div className="profile-grid my-1 "> 
+                  <ProfileAbout profile={profile} />
+                  <div className="profile-exp bg-white p-2">
+
+                    <h2 className="text-primary">Experience</h2>
+                      {profile.experience.length > 0 ? (
+                      <Fragment>
+                        {profile.experience.map((experience) => (
                     <ProfileExperience
                       key={experience._id}
                       experience={experience}
@@ -70,7 +73,7 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
               ) : (
                 <h4>No experience credentials</h4>
               )}
-               </div>
+            </div>
 
             <div className="profile-edu bg-white p-2">
               <h2 className="text-primary">Education</h2>
@@ -91,14 +94,12 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
             {profile.githubusername && (
               <ProfileGithub username={profile.githubusername} />
             )}
-          </div>
-          
-          <button className="chatIcon" ><Chat/></button></div>
+          </div><Feed id="feed"/>
+          <button className="chatIcon" ><Chat/></button></div></div>
         </Fragment>
       )}
     </Fragment>
   );
-
 };
 
 Profile.propTypes = {

@@ -39,7 +39,7 @@ const PostItem = ({
         </div>
         <div className="postCenter">
           <span className="postText">{text}</span>
-          <img className="postImg" src={`/uploads/${postimage}`} alt="" />
+          <img className="postImg" src={postimage} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
