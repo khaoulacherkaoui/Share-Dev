@@ -35,7 +35,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
     <nav className="navbar ">
       <h1>
         <Link to="/">
-          <img className="logo" src="/assets/logo.png"/>
+          <img className="logopr" src="/assets/logo.png"/>
         </Link>
       </h1>
       <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

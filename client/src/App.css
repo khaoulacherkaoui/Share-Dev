@@ -6,7 +6,12 @@
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
-
+.link {
+  color: #1fb299;
+}
+.link:hover {
+  color: #1fb299;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -358,6 +363,12 @@ button {
   margin-top: 9px;
 }
 
+.logopr {
+  width: 54px;
+  height: 32px;
+  margin-top: 25px;
+}
+
 /* Navbar */
 .navbar {
   background-color: #2c8b7d;
@@ -375,7 +386,7 @@ button {
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   padding: 10px;
-  height: 40px;
+  height: 50px;
   width: 30%;
   margin-left: auto;
   margin-right: auto;
@@ -445,11 +456,11 @@ button {
   border: none;
   padding: 5px;
   border-radius: 50%;
-  background-color: #27debf;
+  background-color: white;
   font-weight: 600;
   margin-right: 20px;
   cursor: pointer;
-  color: white;
+  color: #27debf;
   object-fit: cover;
   position: absolute;
   right: 40px;

@@ -36,7 +36,6 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
               <ul className="nav nav-tabs">
                 <li className="nav-item"><a className="nav-link active" href="#feed">Posts</a></li>
                 <li className="nav-item"><a className="nav-link" href="#about">About</a></li>
-                <li className="nav-item"><a className="nav-link" href="#friends">Friends</a></li>
                 <li className="nav-item"><Link to="/profiles" className="nav-link">Developers</Link></li>
                 <li><Link to="/dashboard" className="nav-link">{' '}
                   <span className="hide-sm">Dashboard</span></Link>
@@ -94,8 +93,12 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
             {profile.githubusername && (
               <ProfileGithub username={profile.githubusername} />
             )}
-          </div><Feed id="feed"/>
-          <button className="chatIcon" ><Chat/></button></div></div>
+          </div><Feed/>
+          <button className="chatIcon" >
+            <Link to="/messenger" className="link">
+                <Chat />
+            </Link>
+          </button></div></div>
         </Fragment>
       )}
     </Fragment>
