@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Followbott from './Followbott';
 
 const ProfileItem = ({
   profile: {
@@ -20,9 +21,13 @@ const ProfileItem = ({
           {status} {company && <span> at {company}</span>}
         </p>
         <p className='my-1'>{location && <span>{location}</span>}</p>
+        <span>
         <Link to={`/profile/${_id}`} className='btn btn-primary'>
           View Profile
         </Link>
+        
+        <Followbott idToFollow={_id}/>
+        </span>
       </div>
       <ul>
         {skills.slice(0, 4).map((skill, index) => (

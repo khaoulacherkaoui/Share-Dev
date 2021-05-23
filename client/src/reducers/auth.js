@@ -4,6 +4,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
+  FOLLOW,
   //LOGIN_FAIL,
   LOGOUT,
   ACCOUNT_DELETED
@@ -34,6 +35,14 @@ function authReducer(state = initialState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false
+      };
+    case FOLLOW:
+      return {
+        ...state,
+        user: {
+          ...state.auth.user,
+          followings: [...state.auth.user.followings, action.payload],
+        },
       };
     case ACCOUNT_DELETED:
       return {

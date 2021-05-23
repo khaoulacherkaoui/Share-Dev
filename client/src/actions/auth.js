@@ -1,5 +1,6 @@
 import api from '../utils/api';
 import { setAlert } from './alert';
+import axios from 'axios';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -7,7 +8,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  FOLLOW
 } from './types';
 
 // Load User
@@ -77,3 +79,16 @@ export const login = (email, password) => async dispatch => {
 
 // Logout
 export const logout = () => ({ type: LOGOUT });
+
+
+// follow
+export const follow = (id, userid) => async dispatch => {
+ 
+  const res = await axios.put(`/api/users/${userid}/follow`,id);
+  
+    dispatch({
+      type: FOLLOW,
+      payload: res.data
+    });
+
+};
